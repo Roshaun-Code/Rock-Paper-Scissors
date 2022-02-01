@@ -1,3 +1,9 @@
+//Declaring the score variables
+let playerScore = 0;
+let computerScore = 0;
+
+
+//function computerplay generates a random number between 1 to 3 then assigns rock, paper or scissors to the number 
 function computerPlay (){
     let computerSelection = Math.floor(Math.random() * 3);
 
@@ -11,34 +17,64 @@ function computerPlay (){
     return computerSelection;
 }
 
+//function round calculates whether the computer wins or the player wins
 function round (playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
     if (playerSelection == computerSelection){
-        console.log("Tie");
+        return 2;
     } else if ((playerSelection == "rock") && (computerSelection == "scissors")){
-        console.log("You win! Rock beats Scissors!")
+        return 1;
     }
     else if ((playerSelection == "scissors") && (computerSelection == "paper")){
-        console.log("You win! Scissors beats Paper!")
+        return 1;
     }
     else if (playerSelection == "paper" && (computerSelection == "rock")){
-        console.log("You win! Paper beats Rock")
+        return 1;
     }
     else if ((playerSelection == "scissors") && (computerSelection == "rock")){
-        console.log("You lose! Rock beats Scissors!")
+        return 0;
     }
     else if ((playerSelection == "rock") && (computerSelection == "paper")){
-        console.log("You lose! Paper beats Rock!")
+        return 0;
     }
     else if ((playerSelection == "paper") && (computerSelection == "scissors")){
-        console.log("You lose! Scissors beats Paper!")
+        return 0;
     }
 }
-const playerSelection = "rock";
-console.log("Player choose:" + playerSelection);
-let computerSelection = computerPlay();
-console.log("Computer choose:" + computerSelection);
-console.log(round(playerSelection, computerSelection));
-//computerPlay();
+
+//game function plays 5 rounds then returns the winner
+function game(){
+    for (let i = 0; i < 5; i++)
+    {
+        //prompts the user for every iteration and generates new number
+        let playerSelection = prompt("Rock, Paper or Scissors?");
+        let computerSelection = computerPlay();
+
+        console.log("Player choose:" + " " + playerSelection);
+        console.log("Computer choose:" + " " + computerSelection);
 
 
+        if (round(playerSelection, computerSelection) == 0) {
+            computerScore++;
+            console.log("You lost the round... :(")
+            console.log("\n")
+        } else if (round(playerSelection, computerSelection) == 1) {
+            playerScore++;
+            console.log("You won the round! :D")
+            console.log("\n")
+        } else if (round(playerSelection, computerSelection) == 2) {
+            console.log("Its a draw. :|");
+            console.log("\n")
+        }
+    }
 
+    if( playerScore > computerScore){
+        console.log("You have won the game!")
+    } else if (playerScore < computerScore){
+        console.log("You have lost the game!")
+    } else if (playerScore == computerScore) {
+        console.log("Tie!")
+    }
+} 
+
+console.log(game());
