@@ -1,5 +1,0 @@
-declare function called computerPlay
-function will generate random number between 1 and 3
-use switch case function to assign 1 - 3 to rock paper or scissors
-
-

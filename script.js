@@ -2,6 +2,17 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const body = document.body;
+/*const rock = document.querySelector('#rock')
+rock.addEventListener('click', () => {
+    console.log('Rock');
+})*/
+
+const userSelection = (playerSelection) => {
+    console.log(playerSelection);
+    
+}
+
 
 //function computerplay generates a random number between 1 to 3 then assigns rock, paper or scissors to the number 
 function computerPlay (){
@@ -43,7 +54,7 @@ function round (playerSelection, computerSelection) {
 }
 
 //game function plays 5 rounds then returns the winner
-function game(){
+/*function game(){
     for (let i = 0; i < 5; i++)
     {
         //prompts the user for every iteration and generates new number
@@ -75,6 +86,6 @@ function game(){
     } else if (playerScore == computerScore) {
         console.log("Tie!")
     }
-} 
+}*/
 
-console.log(game());
+//console.log(game());
