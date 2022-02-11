@@ -2,90 +2,96 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const playerScore_span = document.getElementById('playerScore_span')
+const computerScore_span = document.getElementById('computerScore_span')
+const buttons = document.querySelectorAll('button')
+const results_p = document.querySelector('.result > p')
 const body = document.body;
-/*const rock = document.querySelector('#rock')
-rock.addEventListener('click', () => {
-    console.log('Rock');
-})*/
 
-const userSelection = (playerSelection) => {
-    console.log(playerSelection);
-    
-}
-
+buttons.forEach((button) => {
+    button.addEventListener('click', function () {
+        playerSelection = button.id;
+        let computerSelection = computerPlay();
+        round(playerSelection, computerSelection);
+        //scoreCalc();
+    })
+});
 
 //function computerplay generates a random number between 1 to 3 then assigns rock, paper or scissors to the number 
 function computerPlay (){
+    const choices = ['rock', 'paper', 'scissors']
     let computerSelection = Math.floor(Math.random() * 3);
+    return choices[computerSelection];
+}
 
-    if( computerSelection === 0) {
-        computerSelection = "rock";
-    } else if (computerSelection === 1) {
-        computerSelection = "scissors";
-    } else {
-        computerSelection = "paper";
-    }
-    return computerSelection;
+function convertTo(word){
+    if (word === "rock") return "Rock";
+    if (word === "paper") return "Paper";
+    else return "Scissors";
+}
+
+function win(user, computer){
+    console.log("Player wins");
+    playerScore++;
+    playerScore_span.innerHTML = playerScore;
+    computerScore_span.innerHTML = computerScore;
+    results_p.innerHTML = `${convertTo(user)} beats ${convertTo(computer)}. You win!`
+}
+
+function lose(user, computer){
+    console.log("Player lost");
+    computerScore++;
+    playerScore_span.innerHTML = playerScore;
+    computerScore_span.innerHTML = computerScore;
+    results_p.innerHTML = `${convertTo(user)} loses to ${convertTo(computer)}. You Lost..`
+}
+
+function draw(user, computer){
+    playerScore_span.innerHTML = playerScore;
+    computerScore_span.innerHTML = computerScore;
+    results_p.innerHTML = `${convertTo(user)} ties with ${convertTo(computer)}. Its a draw.`
+
 }
 
 //function round calculates whether the computer wins or the player wins
 function round (playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    if (playerSelection == computerSelection){
-        return 2;
-    } else if ((playerSelection == "rock") && (computerSelection == "scissors")){
-        return 1;
+    switch (playerSelection + computerSelection){
+        case 'rockscissors':
+        case 'paperrock':
+        case 'scissorspaper':
+            win(playerSelection, computerSelection);
+            break;
+        case 'rockpaper':
+        case 'paperscissors':
+        case 'scissorsrock':
+            lose(playerSelection, computerSelection);
+            break;
+        case 'rockrock':
+        case 'paperpaper':
+        case 'scissorsscissors':
+            draw(playerSelection, computerSelection);
+            break;        
     }
-    else if ((playerSelection == "scissors") && (computerSelection == "paper")){
-        return 1;
-    }
-    else if (playerSelection == "paper" && (computerSelection == "rock")){
-        return 1;
-    }
-    else if ((playerSelection == "scissors") && (computerSelection == "rock")){
-        return 0;
-    }
-    else if ((playerSelection == "rock") && (computerSelection == "paper")){
-        return 0;
-    }
-    else if ((playerSelection == "paper") && (computerSelection == "scissors")){
-        return 0;
-    }
+    
 }
 
-//game function plays 5 rounds then returns the winner
-/*function game(){
-    for (let i = 0; i < 5; i++)
-    {
-        //prompts the user for every iteration and generates new number
-        let playerSelection = prompt("Rock, Paper or Scissors?");
-        let computerSelection = computerPlay();
-
-        console.log("Player choose:" + " " + playerSelection);
-        console.log("Computer choose:" + " " + computerSelection);
-
-
-        if (round(playerSelection, computerSelection) == 0) {
-            computerScore++;
-            console.log("You lost the round... :(")
-            console.log("\n")
-        } else if (round(playerSelection, computerSelection) == 1) {
-            playerScore++;
-            console.log("You won the round! :D")
-            console.log("\n")
-        } else if (round(playerSelection, computerSelection) == 2) {
-            console.log("Its a draw. :|");
-            console.log("\n")
-        }
-    }
-
-    if( playerScore > computerScore){
-        console.log("You have won the game!")
-    } else if (playerScore < computerScore){
-        console.log("You have lost the game!")
-    } else if (playerScore == computerScore) {
-        console.log("Tie!")
-    }
+//function that adds player score and computer score
+/*function scoreCalc() {
+    if (round(playerSelection, computerSelection) == 1) {
+        playerScore.innerHTML += 1;
+        return console.log('player score increase');
+    } else if (round() == 0) {
+        computerScore.innerHTML += 1;
+        return console.log('computer score increase');
+    };
 }*/
 
-//console.log(game());
+
+
+
+
+
+
+
+
+

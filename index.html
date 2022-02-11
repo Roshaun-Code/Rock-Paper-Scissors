@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>RPS</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Rock, Paper, Scissors</h1>
-
-    <button id="rock", onclick="userSelection('rock')">Rock</button>
-    <button id="paper", onclick="userSelection('paper')">Paper</button>
-    <button id="scissors" onClick="userSelection('scissors')">Scissors</button>
+    <div class="header">
+        <h1>Rock Paper Scissors</h1>
+    </div>
+    <div class="container-parent">
+        <div class="container">
+            <button id="rock">✊</button>
+            <button id="paper">✋</button>
+            <button id="scissors">✌️</button>
+        </div>
+    
+    
+        <div class="span-parent">
+            <span id="playerScore_span">0</span> : <span id="computerScore_span">0</span>
+        </div>
+    </div>
+    
+    <div class="result">
+        <p>Choose your weapon.</p>
+    </div>
 
     
 </body>
